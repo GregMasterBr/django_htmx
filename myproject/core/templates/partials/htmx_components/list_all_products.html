@@ -6,6 +6,8 @@
                 hx-delete="{% url 'deletar_produto' produto.id %}"
                 hx-trigger="click delay:500ms"
                 hx-target="#list-products"
+                hx-confirm="Você tem certeza que deseja deletar o produto?"
+                hx-indicator=".htmx-indicator"
                 >X</button>
             </li>
 
