@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static%}
+
+{% block 'head' %} 
+    <meta name="description" content="Listar Produtos">
+    <script src="https://unpkg.com/htmx.org@1.9.10" integrity="sha384-D1Kt99CQMDuVetoL1lrYwg5t+9QdHe7NLX/SoJYkXDFfX37iInKRy5xLSi8nO7UC" crossorigin="anonymous"></script>
+{% endblock %}
+
+{% block 'title' %}Listagem Produtos{% endblock %}
+
+{% block 'body' %}
+<div class="container">
+    <h1>Cadastrar Produtos</h1>
+    <div class="row">
+        <form>{% csrf_token %}
+            <div class="mb-3">
+                <label for="product" class="form-label">Nome do Produto</label>
+                <input type="text" name="product" class="form-control" id="product" placeholder="Nome do produto"  
+                    hx-get="{% url 'checar_produto' %}"
+                    hx-trigger="keyup"
+                    hx-target="#product-out">
+                </div>
+                <p id="product-out"></p>
+                <div class="mb-3">
+                <label for="preco" class="form-label">Preço</label>
+                <input type="number" name="price" class="form-control" id="preco" placeholder="Preço do produto">
+            </div>
+            <div class="col-auto">
+                <button  class="btn btn-success mb-3"
+                hx-post="{% url 'salvar_produto' %}"
+                hx-trigger="click"
+                hx-target="#list-products"
+                >Salvar produto</button>
+              </div>            
+        </form>
+    </div>
+
+    <hr style="background-color: gray;" />   
+
+    <h2>Listar Produtos cadastrados</h2>
+    <div id="list-products">
+        {% include "partials/htmx_components/list_all_products.html"  %}
+    </div>
+   
+
+</div>    
+{% endblock %}

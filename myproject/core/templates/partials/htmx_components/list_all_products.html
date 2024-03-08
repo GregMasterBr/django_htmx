@@ -1,0 +1,17 @@
+<ul class="list-group list-group-flush">
+    {% if produtos %}
+        {% for produto in produtos %}
+            <li class="list-group-item">{{produto}} 
+                <button role="button" class="badge text-bg-danger float-end"
+                hx-delete="{% url 'deletar_produto' produto.id %}"
+                hx-trigger="click delay:500ms"
+                hx-target="#list-products"
+                >X</button>
+            </li>
+
+
+        {% endfor %}
+{% else %}    
+    <li class="list-group-item">Nenhum produto cadastrado!</li>
+{% endif%}
+</ul>
